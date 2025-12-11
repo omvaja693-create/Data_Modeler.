@@ -1,91 +1,51 @@
-# 🚀 Data Modeler: Building a Normalized Star Schema Data Model
+# 📊 BI Data Model Construction & Schema Design Project 🛠️
 
-This project is an advanced Power BI assignment focused solely on **Data Modeling, ETL, and Schema Design**. The core objective was to build a robust, well-structured relational data model from normalized source data, demonstrating expertise in table relationships, cardinality, and standard Star/Snowflake schema implementation.
+## Project Overview
 
----
-
-## 🎯 Project Objective
-
-The goal of this task was to create an efficient and scalable data model in Power BI using Power Query and the Model View only. No calculated columns, DAX, or visual charts (other than the required verification Matrix table) were used.
-
-The project specifically addressed:
-* Table relationships and cardinality (1:Many, Many:1, and 1:1).
-* Star vs. Snowflake schema design.
-* Handling inactive/ambiguous paths and bidirectional filters.
-* Defining data formats, categories, and hierarchies.
+This repository documents the construction and enhancement of a robust, relational data model designed to support analytical reporting and business intelligence (BI) on Sales and Returns data. The core objective was to build a clean **Star Schema** with fully defined relationships, data quality standards, and built-in reporting hierarchies.
 
 ---
 
-## 📁 Dataset Overview
+## 1. Data Ingestion and Preparation (Power Query)
 
-The model was constructed from six source Excel files, transformed and cleaned via **Power Query**.
+The project began with ensuring a high quality of data integrity through comprehensive cleaning and transformation steps using Power Query.
 
-| File Name | Role | Key Fields |
-| :--- | :--- | :--- |
-| `Sales_Fact.xlsx` | **Central Fact Table** | `SalesID (PK)`, `CustomerID (FK)`, `ProductID (FK)`, `RegionID (FK)`, `DateKey (FK)` |
-| `Customer_Dim.xlsx` | Dimension Table | `CustomerID (PK)` |
-| `Product_Dim.xlsx` | Dimension Table | `ProductID (PK)` |
-| `Region_Dim.xlsx` | Dimension Table | `RegionID (PK)` |
-| `Date_Dim.xlsx` | Dimension Table | `DateKey (PK)` |
-| `Returns_Fact.xlsx` | Fact or Snowflake Table | `ReturnID (PK)`, `SalesID (FK)`, `ReturnDateKey (FK)` |
+* ✅ **Data Import:** All source files were successfully imported via Power Query.
+* 🧹 **Data Cleansing:** Applied proper data types to all columns and removed blank rows, guaranteeing clean data input for the model.
 
----
+## 2. Model Construction & Relationship Architecture
 
-## 🛠️ Key Project Tasks and Implementation Details
+The data model was structured to support accurate filtering and calculations, adhering to best practices for data warehousing.
 
-### 1. Data Transformation (Power Query)
-* All files were imported and loaded via Power Query.
-* Proper **data types** were applied (e.g., currency, whole numbers, dates).
-* Blank rows were removed, and data was cleaned.
-
-### 2. Schema and Relationship Design
-* **Schema:** Implemented a **Star Schema** with `Sales_Fact` as the central table.
-* **Returns Data:** The `Returns_Fact` was modeled as a second fact table, connected to `Sales_Fact` and `Date_Dim`.
-* **Relationship Mapping:** Relationships were manually defined using Foreign and Primary keys:
+* ⭐ **Star Schema Design:** The model is centered around the `Sales_Fact` table, serving as the central fact table.
+* 🔗 **Key Definition:** Primary Keys and Foreign Keys were manually defined to enforce referential integrity.
+* 🔄 **Relationships Established:** Key relationships were created to link the central fact table to dimension tables:
     * `Sales_Fact` $\rightarrow$ `Customer_Dim`
     * `Sales_Fact` $\rightarrow$ `Product_Dim`
     * `Sales_Fact` $\rightarrow$ `Region_Dim`
     * `Sales_Fact` $\rightarrow$ `Date_Dim`
     * `Returns_Fact` $\rightarrow$ `Sales_Fact`
-    * `Returns_Fact` $\rightarrow$ `Date_Dim` (Inactive relationship for `ReturnDateKey`)
+* ⚠️ **Inactive Relationship:** An inactive relationship was implemented for `Returns_Fact` $\rightarrow$ `Date_Dim` (specifically using the `ReturnDateKey`) to enable specific time-based calculations (e.g., measuring returns vs. sales across different date contexts).
+* 🧭 **Filtering Logic:** Appropriate relationship cardinalities ($\text{1:Many}$) and cross-filter directions (preferring **Single**) were meticulously set to ensure data flows correctly. **Filter ambiguity issues** were identified and resolved.
 
-### 3. Advanced Model Settings
-* **Cardinality:** Appropriate relationship cardinalities were set (predominantly 1:Many).
-* **Bidirectional Filters:** Bidirectional filters were enabled/disabled only where justified, with a preference for single-direction filters.
-* **Inactive Relationships:** The secondary date path for returns (`Returns_Fact` $\rightarrow$ `Date_Dim` on `ReturnDateKey`) was intentionally set as an **inactive relationship** and simulated using the `Returns_Fact` table to handle specific inactive relationship scenarios.
-* **Ambiguity:** Any remaining filter ambiguity issues were identified and resolved.
+## 3. Data Model Enhancements & Usability
 
-### 4. Data Enrichment
-* **Data Categories:** Defined for proper sorting (e.g., City, Country, ProductName).
-* **Hierarchies:** Built to support drill-down paths in the model:
-    * `Date_Dim`: Year > Quarter > Month > Date
-    * `Region_Dim`: Country > State > City
-    * `Product_Dim`: Category > Subcategory > ProductName
+The model was optimized for front-end reporting tools by adding organizational features and display formats.
 
----
+* 🔢 **Data Formatting:** Set appropriate data formats across the model (e.g., currency, whole numbers, dates).
+* 🏷️ **Data Categories:** Defined Data Categories (e.g., City, Country, ProductName) for better sorting and geo-mapping capabilities.
+* 🌲 **Reporting Hierarchies Built:** Key organizational hierarchies were built into the Dimension tables to facilitate easy drill-down analysis:
+    * **`Date_Dim`**: Year > Quarter > Month > Date
+    * **`Region_Dim`**: Country > State > City
+    * **`Product_Dim`**: Category > Subcategory > ProductName
 
-## ✅ Verification Step
+## 4. Verification
 
-Model integrity and relationship flow were verified using the only allowed visual: a **Matrix Table**.
+A final verification step confirmed the accuracy and functionality of the established data model.
 
-The Matrix table was used to verify:
-* Sales grouped by Product Category and Region
-* Return reasons by Fiscal Year
-* Revenue by Customer Segment
+* ✅ **Model Validation:** A Matrix Table visual was used to successfully verify data flow and integrity across critical business axes:
+    * Sales grouped by Product Category and Region.
+    * Return reasons by Fiscal Year.
+    * Revenue by Customer Segment.
 
 ---
-
-## 📦 Deliverables
-
-The project deliverables included:
-
-* A single **`.pbix` file** containing the fully transformed model, relationships, hierarchies, and the verification Matrix table.
-* A **short summary** (`.docx` or `.txt`) explaining:
-    * The schema type chosen (Star/Snowflake).
-    * Relationship rationale and filter flow.
-    * Any issues encountered and how they were resolved.
-
----
-
-
-
