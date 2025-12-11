@@ -86,11 +86,6 @@ The project deliverables included:
     * Any issues encountered and how they were resolved.
 
 ---
-sources:
 
-Customer_Dim =  https://docs.google.com/spreadsheets/d/1GsCxTqtI5s7Wy8sdVuMqB4t7oERqqDlZil82XDTkYb4/edit?usp=drive_link
-Product_Dim  =  https://docs.google.com/spreadsheets/d/1pbZwq_pGelaLbwfpfFF5c3AbUOPJy2_hVuBZ5DhRiF4/edit?usp=drive_link
-Region_Dim   =  https://docs.google.com/spreadsheets/d/1NrY3kA2omyZxVjJ6Y4g8cy7KdYHF54AoxTLAVtGNZPU/edit?usp=drive_link
-Date_Dim     =  https://docs.google.com/spreadsheets/d/1mBao38-oPdnS244ZhOKgfsFSvSBbojr_zj-f6EaxufY/edit?usp=drive_link
-Sales_Fact   =  https://docs.google.com/spreadsheets/d/1A25OI8Q0Ceols6ydEAXtxxigkTo_i5xP3qP5NXu5FYE/edit?usp=drive_link
-Return_Fact  =  https://docs.google.com/spreadsheets/d/1eu0ul-OlrElkHvs8N9hsqO4gVhDXCeWOlpCiDPVxPuY/edit?usp=drive_link
+
+
